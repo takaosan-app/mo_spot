@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
-import 'app/my_spot_our_spot_app.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+import 'app/my_spot_our_spot_app.dart';
+import 'core/supabase_config.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (SupabaseConfig.isConfigured) {
+    await Supabase.initialize(
+      url: SupabaseConfig.url,
+      anonKey: SupabaseConfig.anonKey,
+    );
+  }
+
   runApp(const MySpotOurSpotApp());
 }
